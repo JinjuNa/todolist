@@ -1,14 +1,13 @@
 <template>
   <div id="app">
-        <Header v-on:add-item="AddItem"></Header>
-        <List v-bind:propsdata="list" v-on:DeleteItemApp ="Delete"></List>
+        <!-- <Header v-on:add-item="AddItem"></Header>
+        <List v-bind:propsdata="list" v-on:DeleteItemApp ="Delete"></List> -->
+        <router-view></router-view>
   </div>
 </template>
 
 <script>
-import VueRouter from 'vue-router'
-import Header from './components/Header.vue'
-import List from './components/List.vue'
+// import Header from './components/Header.vue'
 
 export default {
   name: 'app',
@@ -29,26 +28,11 @@ return {
       }
   },
   components: {
-    Header,
-    List
+    // Header,
+    // List
   }
 }
 
-export const router = new VueRouter({
-  routes : [
-    { path : '/add', component : Header},
-            {
-                path: '/link',
-                component : List,
-                children : [
-                    // {
-                    //     path:'remove',
-                    //     component : Footer
-                    // }
-                ]
-            }
-  ]
-})
 </script>
 
 <style>

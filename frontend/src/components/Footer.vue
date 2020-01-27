@@ -1,6 +1,6 @@
 <template>
   <section class="footer">
-    <button v-on:click="deleteClick">전체지우기</button>
+    <button v-on:click="deleteClick">CLEAR</button>
   </section>
 </template>
 
@@ -14,3 +14,17 @@ export default {
             }
 }
 </script>
+
+<style scoped>
+.footer{
+  text-align: center;
+}
+.footer button{
+    width:100px;
+    height: 30px;
+    background-color: #2196F3;
+    border:none;
+    border-radius: 15px;
+    color:white;
+  }
+</style>

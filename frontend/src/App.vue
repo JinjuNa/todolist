@@ -2,7 +2,7 @@
   <div id="app">
       <h1>To do List</h1>
         <Header v-on:add-item="AddItem"></Header>
-        <List v-bind:propsdata="list" v-on:DeleteItemApp ="Delete"></List>
+        <List v-bind:propsdata="list" v-on:DeleteItemApp ="Delete" v-on:DeleteSingleItemApp="DeleteSingle"></List>
         
   </div>
 </template>
@@ -26,8 +26,10 @@ return {
       Delete : function(){
         this.list = []
       },
-      // DeleteSingle : function(val){
-      // },
+      DeleteSingle : function(index){
+        console.log(index)
+        alert(index);
+      },
       getData : function(){
         axios.get('http://localhost:3000/list').then((res) => {
           console.log(res)
@@ -48,6 +50,10 @@ return {
 </script>
 
 <style>
+/* *{
+  margin:0;
+  padding: 0;
+} */
       #app{
         margin: 0 auto;
         width:50%;

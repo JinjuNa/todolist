@@ -7,9 +7,20 @@
           <span class="checkmark"></span>
           
         </label>
-        <!-- <i class="far fa-trash-alt" v-on:delete-single-item="DeleteSingleItem"></i> -->
+        <i class="far fa-edit edit" @click="openPopup(index)"></i>
+        <i class="far fa-trash-alt trash" v-on:click="DeleteSingleItem(index)"></i>
         </li>
     </ul>
+
+    <div class="popup" v-show="IsShow">
+      <div class="editInput">
+        <input type="text" v-model="edit">
+      </div>
+      <div class="editButton">
+        <button @click="Edit">수정</button>
+        <button @click="Cancel">취소</button>
+      </div>
+    </div>
     <Footer v-on:delete-item="DeleteItem"></Footer>
   </section>
 </template>
@@ -25,16 +36,30 @@ export default {
   },
   data : function() {
 return {
-    idx : 0
+    IsShow : false,
+    edit : "수정할 문구를 적어주세요."
   };
 },
   methods :{
       DeleteItem : function(){
         this.$emit('DeleteItemApp')
       },
-      DeleteSingleItem : function(){
-        this.idx = 0;
-        this.$emit('DelteSingleItemApp', this.idx )
+      DeleteSingleItem : function(index){ 
+        // console.log(index)
+        // this.idx = index;
+        this.$emit('DelteSingleItemApp', index)
+      },
+      openPopup : function(index){
+        this.IsShow = true
+        console.log(index)
+      },
+      Edit : function(){
+        this.IsShow = false
+        console.log(this.edit)
+        this.$emit('EditItem', this.edit)
+      },
+      Cancel : function(){
+        this.IsShow = false
       }
   }
 }
@@ -42,11 +67,43 @@ return {
 </script>
 
 <style scoped>
+.list{
+  position: relative;
+}
+
+.popup{
+  position: absolute;
+  width:70%;
+  height: 90px;
+  background-color: #efefef;
+  top:0;
+  left:50%;
+  margin-left:-35%;
+  border-radius: 10px;
+  border: 2px solid white;
+}
 ul{
   margin-left:100px;
 }
+.edit{
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.edit:hover{
+  color: #2196F3;
+}
+.trash{
+  /* margin-left:100px; */
+  cursor: pointer;
+}
+
+.trash:hover{
+  color: #2196F3;
+}
 .container {
-  display: block;
+  display: inline-block;
+  width:60%;
   position: relative;
   padding-left: 35px;
   margin-bottom: 12px;
